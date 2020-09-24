@@ -1,4 +1,4 @@
 export interface MessageDto {
-  readonly nick: string;
-  readonly message: string;
+  nick: string;
+  message: string;
 }
