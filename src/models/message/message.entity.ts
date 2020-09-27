@@ -4,11 +4,11 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm/index';
 export class MessageEntity {
 
   @PrimaryGeneratedColumn()
-  private id: number;
+  id: number;
 
   @Column()
-  private nick: string;
+  nick: string;
 
   @Column()
-  private message: string;
+  message: string;
 }
