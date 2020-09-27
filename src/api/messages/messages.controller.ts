@@ -13,7 +13,7 @@ export class MessagesController {
   createMessage(@Body() messageDto: MessageDto, @Res() response) {
     return this.messageService.create(messageDto).then( (res) => {
       response.status(HttpStatus.CREATED).json(res);
-      console.log('create success'); // In future will use Logger
+      console.log(`create message with id: ${res.id} success`); // In future will use Logger
     }).catch( () => {
       response.status(HttpStatus.FORBIDDEN).json({ message: 'Error al crear mensaje' })
     });
@@ -23,7 +23,7 @@ export class MessagesController {
   getAll(@Res() response) {
     return this.messageService.getAll().then((res) => {
       response.status(HttpStatus.OK).json(res);
-      console.log('get success') // In future will use Logger
+      console.log('GET Messages') // In future will use Logger
     }).catch( () => {
       response.status(HttpStatus.FORBIDDEN).json({ message: 'Error al obtener la lista de mensajes' })
     });
@@ -33,7 +33,7 @@ export class MessagesController {
   updateMessage(@Body() messageDto: MessageDto, @Res() response, @Param('id') idMessage: number) {
     return this.messageService.update(messageDto, idMessage).then((res) => {
       response.status(HttpStatus.OK).json(res);
-      console.log('update success'); // In future will use Logger
+      console.log(`update message with id: ${res.id} success`); // In future will use Logger
     }).catch(
       response.status(HttpStatus.FORBIDDEN).json({message:'Error al actualizar mensaje'})
     );
@@ -43,7 +43,7 @@ export class MessagesController {
   deleteMessage(@Param('id') idMessage: number, @Res() response) {
     return this.messageService.delete(idMessage).then((res) => {
       response.status(HttpStatus.OK).json(res);
-      console.log('delete success'); // In future will use Logger
+      console.log(`delete message with id: ${idMessage} success`); // In future will use Logger
     }).catch( () => {
       response.status(HttpStatus.FORBIDDEN).json({ message: 'Error al actualizar mensaje' })
     })
