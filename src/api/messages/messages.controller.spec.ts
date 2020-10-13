@@ -40,6 +40,17 @@ describe('MessagesController', () => {
     expect(messagesController.createMessage(message,response)).toEqual(result);
   });
 
+  it('should updateMessage method update a messages', () => {
+    const message = new MessageEntity();
+    message.id = 1;
+    const result = new Promise<any>(resolve => {
+      resolve(message);
+    });
+    jest.spyOn(messageService, 'update').mockImplementation(() => result);
+
+    expect(messagesController.updateMessage(message,response,message.id)).toEqual(result);
+  });
+
   it('should getAll method return all messages', () => {
     const result = new Promise<MessageEntity[]>(resolve => {
       resolve(Array.of(new MessageEntity()));

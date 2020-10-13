@@ -34,9 +34,9 @@ export class MessagesController {
     return this.messageService.update(messageDto, idMessage).then((res) => {
       response.status(HttpStatus.OK).json(res);
       console.log(`update message with id: ${res.id} success`); // In future will use Logger
-    }).catch(
-      response.status(HttpStatus.FORBIDDEN).json({message:'Error al actualizar mensaje'})
-    );
+    }).catch( () => {
+      response.status(HttpStatus.FORBIDDEN).json({ message: 'Error al actualizar mensaje' })
+    });
   }
 
   @Delete(':id')
