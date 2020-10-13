@@ -9,7 +9,7 @@ describe('MessagesController', () => {
   let message: MessageEntity;
   let messagesController: MessagesController;
   let messageService: MessageService;
-  let messageRepository = {
+  const messageRepository = {
     create: jest.fn().mockResolvedValue(message),
     save: jest.fn().mockReturnValue(Promise.resolve())
   };
@@ -23,12 +23,21 @@ describe('MessagesController', () => {
 
     messagesController = await module.get<MessagesController>(MessagesController);
     messageService =  await module.get<MessageService>(MessageService);
-    messageRepository = await module.get(getRepositoryToken(MessageEntity));
   });
 
   it('should message controller and service be defined', () => {
     expect(messagesController).toBeDefined();
     expect(messageService).toBeDefined();
+  });
+
+  it('should createMessage method create a messages', () => {
+    const message = new MessageEntity();
+    const result = new Promise<any>(resolve => {
+      resolve(message);
+    });
+    jest.spyOn(messageService, 'create').mockImplementation(() => result);
+
+    expect(messagesController.createMessage(message,response)).toEqual(result);
   });
 
   it('should getAll method return all messages', () => {
