@@ -1,0 +1,10 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "nest",
+  "password": "hunter",
+  "database": "message_db",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": false
+}
