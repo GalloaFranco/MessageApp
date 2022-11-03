@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import * as cluster from 'cluster';
+import * as os from 'os';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,4 +19,13 @@ async function bootstrap() {
 
   await app.listen(3000);
 }
-bootstrap();
+
+const cpus = os.cpus().length;
+
+if (cluster.isMaster) {
+  for (let i = 0; i < cpus; i++) {
+    cluster.fork();
+  }
+} else {
+  bootstrap().then(() => console.log('Server running 🚀!'));
+}
